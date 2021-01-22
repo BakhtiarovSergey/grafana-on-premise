@@ -1,12 +1,13 @@
-### Installing Prometheus, Grafana, Loki, Promtail
+### Installing Prometheus, Grafana, Loki, Promtail via ansible-playbook
 1. Install pre requirements
 
+        sudo apt-get install -y ansible
         ansible-galaxy install cloudalchemy.prometheus
         ansible-galaxy install cloudalchemy.grafana
         ansible-galaxy install cloudalchemy.node-exporter
         ansible-galaxy collection install community.grafana
 
-2. Fix IP in hosts.yml if needed
+2. Fix IP in hosts.yml if needed "on-premise" instead VM
 3. Run VM in vagrant
 
         vagrant up
