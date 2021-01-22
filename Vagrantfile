@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider :virtualbox do |v|
     v.memory = 2048
     v.cpus = 1
-    v.name = "Grafana_for_TDG_bionic"
+    v.name = "Grafana"
   end
 
   config.vm.define :grafana do |master|
