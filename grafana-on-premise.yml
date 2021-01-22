@@ -1,23 +1,23 @@
 ---
 - hosts: grafana
   become: true
-  # roles:
-  # - cloudalchemy.prometheus
-  # - cloudalchemy.node-exporter
-  # - cloudalchemy.grafana
-  # vars:
+  roles:
+  - cloudalchemy.prometheus
+  - cloudalchemy.node-exporter
+  - cloudalchemy.grafana
+  vars:
 
-  #   # ADD TARGETS HERE:
-  #   # prometheus_targets:
-  #   #   node:
-  #   #   - targets:
-  #   #     - example.host:9100
-  #   #     labels:
-  #   #       env: example.host
+    # ADD TARGETS HERE:
+    prometheus_targets:
+      node:
+      - targets:
+        - localhost:9100
+        labels:
+          env: localhost
 
-  #   grafana_security:
-  #     admin_user: admin
-  #     admin_password: admin
+    grafana_security:
+      admin_user: admin
+      admin_password: admin
 
   tasks:
   - name: Install additional soft
