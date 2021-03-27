@@ -4,7 +4,7 @@
         sudo apt-get install -y ansible
         ansible-galaxy install cloudalchemy.prometheus
         ansible-galaxy install cloudalchemy.grafana
-        ansible-galaxy install cloudalchemy.node-exporter
+        ansible-galaxy install cloudalchemy.node_exporter
         ansible-galaxy collection install community.grafana
 
 2. Fix IP in hosts.yml if needed "on-premise" instead VM
