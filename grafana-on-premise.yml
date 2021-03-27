@@ -3,7 +3,7 @@
   become: true
   roles:
   - cloudalchemy.prometheus
-  - cloudalchemy.node-exporter
+  - cloudalchemy.node_exporter
   - cloudalchemy.grafana
   vars:
 
