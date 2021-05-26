@@ -32,3 +32,12 @@ On any dashboard:
 
 ![share](docs/share.png)
 ![direct_link](docs/direct_link.png)
+
+6. Add node1 to Prometheus targets for scraping
+```sh
+# insall node_exporter on node1
+ansible-playbook node_exporter.yml
+# to start scraping
+vagrant ssh grafana
+echo '  - 192.168.99.98:9100' | sudo tee -a /etc/prometheus/file_sd/node.yml
+```
