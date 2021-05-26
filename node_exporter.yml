@@ -1,5 +1,5 @@
 ---
-- hosts: node1
+- hosts: nodes
   become: true
   roles:
   - cloudalchemy.node_exporter
@@ -15,6 +15,14 @@
       packages:
       - unzip
       - zip
+
+  - name: Restart rsyslog service
+    systemd:
+      name: rsyslog.service
+      state: restarted
+      daemon_reload: yes
+      enabled: yes
+      masked: no
 
   - name: Download Promtail and put in /usr/local/bin
     ansible.builtin.unarchive:
@@ -76,3 +84,11 @@
 
           [Install]
           WantedBy=multi-user.target
+
+  - name: Restart Promtail service
+    systemd:
+      name: promtail.service
+      state: restarted
+      daemon_reload: yes
+      enabled: yes
+      masked: no
