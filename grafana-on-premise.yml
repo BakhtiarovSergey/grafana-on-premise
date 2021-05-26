@@ -3,11 +3,9 @@
   become: true
   roles:
   - cloudalchemy.prometheus
-  - cloudalchemy.node-exporter
+  - cloudalchemy.node_exporter
   - cloudalchemy.grafana
   vars:
-
-    # ADD TARGETS HERE:
     prometheus_targets:
       node:
       - targets:
@@ -229,4 +227,46 @@
       grafana_url: http://localhost:3000
       ds_type: prometheus
       ds_url: http://localhost:9090
+      is_default: yes
       state: present
+
+  - name: Install/update Grafana grafana-image-renderer plugin
+    community.grafana.grafana_plugin:
+      name: grafana-image-renderer
+      version: latest
+      state: present
+
+  - name: Restart grafana-server service
+    systemd:
+      name: grafana-server.service
+      state: restarted
+      daemon_reload: yes
+      enabled: yes
+      masked: no
+
+  - name: Install grafana-image-renderer dependencies
+    apt: 
+      name: "{{ packages }}"
+      state: present
+      update_cache: yes
+      cache_valid_time: 3600
+    vars:
+      packages:
+      - libx11-xcb1
+      - libxcb-dri3-0
+      - libxcomposite1
+      - libxcb-cursor0
+      - libxcursor1
+      - libxdamage1
+      - libxi6
+      - libxtst6
+      - libnss3
+      - libatk1.0-0
+      - libatk-bridge2.0-0
+      - libcups2
+      - libxss1
+      - libxrandr2
+      - libgbm1
+      - libasound2
+      - libgtk-3-0
+      - libpangocairo-1.0-0
