@@ -16,6 +16,14 @@
       - unzip
       - zip
 
+  - name: Restart rsyslog service
+    systemd:
+      name: rsyslog.service
+      state: restarted
+      daemon_reload: yes
+      enabled: yes
+      masked: no
+
   - name: Download Promtail and put in /usr/local/bin
     ansible.builtin.unarchive:
       src: https://github.com/grafana/loki/releases/download/v2.1.0/promtail-linux-amd64.zip
@@ -76,3 +84,11 @@
 
           [Install]
           WantedBy=multi-user.target
+
+  - name: Restart Promtail service
+    systemd:
+      name: promtail.service
+      state: restarted
+      daemon_reload: yes
+      enabled: yes
+      masked: no
